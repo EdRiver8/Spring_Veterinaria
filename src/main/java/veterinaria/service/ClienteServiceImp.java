@@ -35,7 +35,7 @@ public class ClienteServiceImp implements ClienteService{
     @Override
     public Cliente updateCliente(Cliente cliente, Long id) {
         if(findClienteById(id) != null){
-            return createCliente(cliente);
+            return clienteRepository.save(cliente);
         }
         return null;
     }
