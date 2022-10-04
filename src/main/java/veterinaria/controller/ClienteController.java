@@ -24,10 +24,10 @@ public class ClienteController {
         if(result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        if(clienteService.createCliente(cliente) != null){
+//        if(clienteService.createCliente(cliente) != null){
             return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.createCliente(cliente));
-        }
-        return ResponseEntity.badRequest().build();
+//        }
+//        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/{id}")

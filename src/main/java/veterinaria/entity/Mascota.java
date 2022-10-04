@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
@@ -15,13 +16,13 @@ import javax.validation.constraints.NotEmpty;
 public class Mascota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotEmpty(message = "Ingrese el nombre de la mascota")
     private String nombre;
     private String raza;
     private Integer edad;
 
-    @NotEmpty(message = "Ingrese el peso de la mascota")
+    @Min(value = 1, message = "Ingrese el peso de la mascota")
     private Float peso;
 }
