@@ -6,6 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -30,4 +31,8 @@ public class Cliente {
 
     @Size(max = 15)
     private String telefono;
+
+//    mapeado por el nombre del atributo con el que se relaciona
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Mascota> mascota;
 }

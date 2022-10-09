@@ -1,5 +1,6 @@
 package veterinaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -25,4 +27,10 @@ public class Mascota {
 
     @Min(value = 1, message = "Ingrese el peso de la mascota")
     private Float peso;
+
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", updatable = true) //  nombre de la columna en la db
+    @NotNull(message = "Debe ingresar la moscata que trajo el cliente")
+    @JsonBackReference // solo carga la mascota desde el cliente, mas no se carga el cliente cuando se busque la mascota
+    private Cliente cliente;
 }
