@@ -39,7 +39,7 @@ public class MedicamentoServiceImp implements MedicamentoService{
     public Medicamento updateMedicamento(Medicamento medicamento, Long id) {
         if(findMedicamentoById(id)!=null){
             medicamento.setId(findMedicamentoById(id).getId());
-            createMedicamento(medicamento);
+            return createMedicamento(medicamento);
         }
         return null;
     }
