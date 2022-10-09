@@ -35,6 +35,9 @@ public class ClienteServiceImp implements ClienteService{
     @Override
     public Cliente updateCliente(Cliente cliente, Long id) {
         if(findClienteById(id) != null){
+            // 'cliente' a actualizar llega sin id porque no se ha guardado en db, por ello se asigna el
+            // id del cliente encontrado y se guarda el cliente que ingresa a actualizar
+            cliente.setId(findClienteById(id).getId());
             return clienteRepository.save(cliente);
         }
         return null;

@@ -38,6 +38,7 @@ public class MascotaServiceImp implements MascotaService{
     @Override
     public Mascota updateMascota(Mascota mascota, Integer id) {
         if(findMascota(id) != null){
+            mascota.setId(findMascota(id).getId());
             return mascotaRepository.save(mascota);
         }
         return null;
