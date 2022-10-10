@@ -1,5 +1,6 @@
 package veterinaria.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Data
+@Getter @Setter
 @AllArgsConstructor @NoArgsConstructor @Builder
 @Table(name = "clientes")
 public class Cliente {
@@ -34,5 +35,6 @@ public class Cliente {
 
 //    mapeado por el nombre del atributo con el que se relaciona
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Mascota> mascota;
 }

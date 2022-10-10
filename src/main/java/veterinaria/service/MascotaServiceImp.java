@@ -23,7 +23,7 @@ public class MascotaServiceImp implements MascotaService{
     }
 
     @Override
-    public Mascota findMascota(Integer id) {
+    public Mascota findMascota(Long id) {
         return mascotaRepository.findById(id).orElse(null);
     }
 
@@ -36,7 +36,7 @@ public class MascotaServiceImp implements MascotaService{
     }
 
     @Override
-    public Mascota updateMascota(Mascota mascota, Integer id) {
+    public Mascota updateMascota(Mascota mascota, Long id) {
         if(findMascota(id) != null){
             mascota.setId(findMascota(id).getId());
             return mascotaRepository.save(mascota);
@@ -45,7 +45,7 @@ public class MascotaServiceImp implements MascotaService{
     }
 
     @Override
-    public Mascota deleteMascota(Integer id) {
+    public Mascota deleteMascota(Long id) {
         if(findMascota(id) != null){
             Mascota mascota = findMascota(id);
             mascotaRepository.delete(findMascota(id));

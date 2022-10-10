@@ -28,7 +28,7 @@ public class MascotaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Mascota> findMascota(@PathVariable("id") Integer id){
+    public ResponseEntity<Mascota> findMascota(@PathVariable("id") Long id){
         if(mascotaService.findMascota(id) != null){
             return ResponseEntity.ok(mascotaService.findMascota(id));
         }
@@ -44,7 +44,7 @@ public class MascotaController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<Mascota> updateMascota(@Valid @RequestBody Mascota mascota, @PathVariable("id") Integer id, BindingResult result){
+    public ResponseEntity<Mascota> updateMascota(@Valid @RequestBody Mascota mascota, @PathVariable("id") Long id, BindingResult result){
         if(result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -55,7 +55,7 @@ public class MascotaController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Mascota> deleteMascota(@PathVariable Integer id){
+    public ResponseEntity<Mascota> deleteMascota(@PathVariable Long id){
         if(mascotaService.findMascota(id) == null){
             return ResponseEntity.notFound().build();
         }

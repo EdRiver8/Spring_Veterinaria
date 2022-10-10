@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import veterinaria.entity.Mascota;
 
 @Repository
-public interface MascotaRepository extends JpaRepository<Mascota, Integer> {
+public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 }

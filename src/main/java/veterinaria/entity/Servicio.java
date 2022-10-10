@@ -1,18 +1,18 @@
 package veterinaria.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Data
+@Getter @Setter
 @AllArgsConstructor @NoArgsConstructor @Builder
 @Table(name = "servicios")
 public class Servicio {
@@ -28,5 +28,19 @@ public class Servicio {
     @NotBlank(message = "Debe ingresar una descripcion del servicio")
     @Column(name = "descripcion_servicio")
     private String descripcion;
+
+    @ManyToOne
+    @JoinColumn(name = "mascota_id", nullable = false)
+    @JsonBackReference
+    private Mascota mascota;
+
+//    @ManyToOne
+//    @JoinColumn(name = "medicamento_id", updatable = false, nullable = false)
+//    @JsonBackReference
+//    private Medicamento medicamento;
+
+    @OneToMany(mappedBy = "servicio", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Medicamento> medicamento;
 
 }
