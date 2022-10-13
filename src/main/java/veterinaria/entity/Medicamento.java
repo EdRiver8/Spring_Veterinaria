@@ -29,9 +29,9 @@ public class Medicamento {
     @NotEmpty
     private String dosis;
 
-//    @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicamento")
-//    @JsonManagedReference
-//    private List<Servicio> servicio;
+   @OneToMany(fetch = FetchType.LAZY, mappedBy = "medicamento")
+   @JsonManagedReference
+   private List<Servicio> servicio;
 
 //    @ManyToOne
 //    @JsonBackReference

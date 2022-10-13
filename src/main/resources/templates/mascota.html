@@ -5,47 +5,72 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../static/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="veterinary/v1/static/css/style.css">
   <title>Mascotas</title>
 </head>
 
 <body>
-  <div>
-    <!-- cuando se le de enviar, ejecuta '/mascota' por el methodo post -->
-    <form th:action="@{/mascotas/{id}(id=*{id})}" method="post">
-      <div>
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" th:field="${mascota.nombre}" required>
-      </div>
-      <div>
-        <label for="raza">Raza</label>
-        <input type="text" id="raza" th:field="${mascota.raza}" required>
-      </div>
-      <div>
-        <label for="edad">Edad</label>
-        <input type="text" id="edad" th:field="${mascota.edad}">
-      </div>
-      <div>
-        <label for="peso">Peso</label>
-        <input type="text" id="peso" th:field="${mascota.peso}" required>
-      </div>
-      <div>
-        <label for="cliente">cliente</label>
-        <input type="text" id="cliente" th:field="${mascota.cliente}">
-      </div>
-      <div>
-        <button type="submit">Guardar</button>
-      </div>
-    </form>
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a href="/veterinary/v1/clientes" class="navbar-brand">Clientes</a>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/mascotas" class="navbar-brand">Mascotas</a></div>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/medicamentos" class="navbar-brand">Medicamentos</a>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/servicios" class="navbar-brand">Servicios</a>
+    </li>
+  </ul>
+  <div class="p-3 bg-light rounded shadow text-center mb--5">
+    <h1 class="text-primary">INFORME DE MASCOTAS</h1>
+    <hr>
+    <p>Consulta, edita o elimina los mascotas de la veterinaria</p>
   </div>
-  <div>
+  <div class="container">
+    <div class="col-lg-3 col-md-5">
+      <!-- cuando se le de enviar, ejecuta '/mascota' por el methodo post -->
+      <form th:action="@{/mascotas/{id}(id=*{id})}" method="post" class="row g-3">
+        <div class="mb-1">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input class="form-control" type="text" id="nombre" th:field="${mascota.nombre}" required>
+        </div>
+        <div class="mb-1">
+          <label for="raza">Raza</label>
+          <input class="form-control" type="text" id="raza" th:field="${mascota.raza}" required>
+        </div>
+        <div class="mb-1">
+          <label for="edad">Edad</label>
+          <input class="form-control" type="text" id="edad" th:field="${mascota.edad}">
+        </div>
+        <div class="mb-1">
+          <label for="peso">Peso</label>
+          <input class="form-control" type="text" id="peso" th:field="${mascota.peso}" required>
+        </div>
+        <div class="mb-1">
+          <label for="cliente">Cliente</label>
+          <input class="form-control" type="text" id="cliente" th:field="${mascota.cliente}">
+        </div>
+        <div class="mb-1">
+          <button type="submit" class="btn btn-primary mb-3">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="container">
     <h1>Lista de Mascotas</h1>
-    <table>
+    <table class="table table-hover">
       <thead>
         <th>NOMBRE</th>
         <th>RAZA</th>
         <th>EDAD</th>
         <th>PESO</th>
+        <th>DUEÑO</th>
+        <th>ID</th>
         <th>EDITAR</th>
         <th>BORRAR</th>
       </thead>
@@ -55,6 +80,8 @@
           <td th:text="*{raza}"></td>
           <td th:text="*{edad}"></td>
           <td th:text="*{peso}"></td>
+          <td th:text="*{cliente.nombres} + ' ' + *{cliente.apellidos}"></td>
+          <td th:text="*{cliente.id}"></td>
           <td>
             <a th:href="@{/mascotas/{id} (id=*{id})}">EDITAR</a>
           </td>

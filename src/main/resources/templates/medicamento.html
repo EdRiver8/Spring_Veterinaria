@@ -5,32 +5,54 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   <title>Medicamentos</title>
 </head>
 
 <body>
-  <div>
-    <!-- cuando se le de enviar, ejecuta la url '/medicamento' por el methodo post -->
-    <form th:action="@{/medicamentos/{id}(id=*{id})}" method="post">
-      <div>
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" th:field="${medicamento.nombre}" required>
-      </div>
-      <div>
-        <label for="dosis">Dosis</label>
-        <input type="text" id="dosis" th:field="${medicamento.dosis}" required>
-      </div>
-      <div>
-        <label for="descripcion">Descripcion</label>
-        <input type="text" id="descripcion" th:field="${medicamento.descripcion}">
-      </div>
-      <button type="submit">Guardar</button>
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a href="/veterinary/v1/clientes" class="navbar-brand">Clientes</a>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/mascotas" class="navbar-brand">Mascotas</a></div>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/medicamentos" class="navbar-brand">Medicamentos</a>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/servicios" class="navbar-brand">Servicios</a>
+    </li>
+  </ul>
+  <div class="p-3 bg-light rounded shadow text-center mb-5">
+    <h1 class="text-primary">INFORME DE MEDICAMENTOS</h1>
+    <hr>
+    <p>Consulta, edita o elimina los medicamentos de la veterinaria</p>
   </div>
-  </form>
+  <div class="container">
+    <div class="col-lg-4 col-md-6">
+      <!-- cuando se le de enviar, ejecuta la url '/medicamento' por el methodo post -->
+      <form th:action="@{/medicamentos/{id}(id=*{id})}" method="post">
+        <div class="mb-2">
+          <label for="nombre">Nombre</label>
+          <input class="form-control" type="text" id="nombre" th:field="${medicamento.nombre}" required>
+        </div>
+        <div class="mb-2">
+          <label for="dosis">Dosis</label>
+          <input class="form-control" type="text" id="dosis" th:field="${medicamento.dosis}" required>
+        </div>
+        <div class="mb-2">
+          <label for="descripcion">Descripcion</label>
+          <input class="form-control" type="text" id="descripcion" th:field="${medicamento.descripcion}">
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
   </div>
-  <div>
+  <div class="container">
     <h1>Lista de Medicamentos</h1>
-    <table>
+    <table class="table table-striped table-hover table-bordered">
       <thead>
         <th>NOMBRE</th>
         <th>DOSIS</th>

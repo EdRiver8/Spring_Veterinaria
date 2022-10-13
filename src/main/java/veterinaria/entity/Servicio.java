@@ -34,18 +34,18 @@ public class Servicio {
     private LocalDate fechaServicioActualizacion;
 
     @NotBlank(message = "Debe ingresar una descripcion del servicio")
-    @Column(name = "descripcion_servicio")
+    @Column(name = "descripcion")
     private String descripcion;
 
-//    @ManyToOne
-//    @JoinColumn(name = "mascota_id", nullable = false)
-//    @JsonBackReference
-//    private Mascota mascota;
-//
-////    @ManyToOne
-////    @JoinColumn(name = "medicamento_id", updatable = false, nullable = false)
-////    @JsonBackReference
-////    private Medicamento medicamento;
+   @ManyToOne
+   @JoinColumn(name = "mascota_id", nullable = true)
+   @JsonBackReference
+   private Mascota mascota;
+
+   @ManyToOne
+   @JoinColumn(name = "medicamento_id", updatable = false, nullable = false)
+   @JsonBackReference
+   private Medicamento medicamento;
 //
 //    @OneToMany(mappedBy = "servicio", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JsonManagedReference

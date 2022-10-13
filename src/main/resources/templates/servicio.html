@@ -5,31 +5,74 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="veterinary/v1/static/css/style.css">
   <title>Servicios</title>
 </head>
 
 <body>
-  <div>
-    <!-- cuando se le de enviar, ejecuta la url '/servicios' por el methodo post -->
-    <form th:action="@{/servicios/{id}(id=*{id})}" method="post">
-      <div>
-        <label for="descripcion">Descripcion</label>
-        <textarea cols="30" rows="2" id="descripcion" th:field="${servicio.descripcion}">Hola</textarea>
-      </div>
-      <button type="submit">Guardar</button>
+  <ul class="nav nav-pills nav-fill">
+    <li class="nav-item">
+      <a href="/veterinary/v1/clientes" class="navbar-brand">Clientes</a>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/mascotas" class="navbar-brand">Mascotas</a></div>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/medicamentos" class="navbar-brand">Medicamentos</a>
+    </li>
+    <li class="nav-item">
+      <a href="/veterinary/v1/servicios" class="navbar-brand">Servicios</a>
+    </li>
+  </ul>
+  <div class="p-3 bg-light rounded shadow text-center mb-5">
+    <h1 class="text-primary">INFORME DE SERVICIOS</h1>
+    <hr>
+    <p>Consulta, edita o elimina los servicios de la veterinaria</p>
   </div>
-  </form>
+  <div class="container">
+    <div class="col-lg-4 col-md-6">
+      <!-- cuando se le de enviar, ejecuta la url '/servicios' por el methodo post -->
+      <form th:action="@{/servicios/{id}(id=*{id})}" method="post">
+        <div class="mb-1">
+          <div class="col-auto mb-2"><label for="mascota" class="col-sm-2 col-form-label">Mascota</label></div>
+          <div class="col-auto mb-2"><input type="text" id="mascota" th:field="${servicio.mascota}"
+              class="form-control">
+          </div>
+        </div>
+        <div class="mb-1">
+          <div class="col-auto mb-2"><label for="medicamento">Medicamento</label></div>
+          <div class="col-auto mb-2"><input type="text" id="medicamento" th:field="${servicio.medicamento}"
+              class="form-control"></div>
+        </div>
+        <div class="mb-1">
+          <div class="col-auto mb-2"><label for="descripcion">Descripcion</label></div>
+          <div class="col-auto mb-2"><textarea cols="30" rows="2" id="descripcion" th:field="${servicio.descripcion}"
+              class="form-control"></textarea></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </form>
+    </div>
   </div>
-  <div>
+  <div class="container">
     <h1>Lista de Servicios</h1>
-    <table>
+    <table class="table table-striped table-hover table-bordered">
       <thead>
+        <th>DUEÑO</th>
+        <th>MASCOTA</th>
+        <th>MEDICAMENTO</th>
         <th>DESCRIPCION</th>
         <th>CREADO</th>
         <th>MODIFICADO</th>
+        <th>EDITAR</th>
+        <th>BORRAR</th>
       </thead>
       <tbody>
         <tr th:each="servicio : ${servicios}" th:object="${servicio}">
+          <td th:text="*{mascota.cliente.nombres} + ' ' + *{mascota.cliente.apellidos} "></td>
+          <td th:text="*{mascota.nombre}"></td>
+          <td th:text="*{medicamento.nombre}"></td>
           <td th:text="*{descripcion}"></td>
           <td th:text="*{fechaServicio}"></td>
           <td th:text="*{fechaServicioActualizacion}"></td>
@@ -43,6 +86,10 @@
       </tbody>
     </table>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+  </script>
 </body>
 
 </html>

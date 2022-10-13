@@ -1,11 +1,12 @@
 --/**** DROP TABLES - al contrario de su creacion por las relaciones FK ******/
-DROP TABLE IF EXISTS medicamentos;
+/**** DROP TABLES - al contrario de su creacion por las relaciones FK ******/
 DROP TABLE IF EXISTS servicios;
+DROP TABLE IF EXISTS medicamentos;
 DROP TABLE IF EXISTS mascotas;
 DROP TABLE IF EXISTS clientes;
 
 
---/*********** CREATE TABLES ****************/
+/*********** CREATE TABLES ****************/
 CREATE TABLE IF NOT EXISTS clientes (
   id serial, /* serial es el autoincrementable de postgres */
   cedula int not null,
@@ -26,21 +27,22 @@ CREATE TABLE IF NOT EXISTS mascotas (
   FOREIGN KEY (cliente_id) REFERENCES clientes (id)
 );
 
-CREATE TABLE IF NOT EXISTS servicios (
-  id serial PRIMARY KEY,
-  fecha_servicio DATE NOT NULL,
-  descripcion varchar(255),
-  mascota_id int NOT NULL,
-  FOREIGN KEY (mascota_id) REFERENCES mascotas (id)
-);
-
 CREATE TABLE IF NOT EXISTS medicamentos (
   id serial PRIMARY KEY,
   nombre varchar(50) NOT NULL,
   descripcion varchar(50),
   dosis varchar(20)
 );
+	
+CREATE TABLE IF NOT EXISTS servicios (
+  id serial PRIMARY KEY,
+  creado DATE NOT NULL,
+  actualizado DATE,
+  descripcion varchar(255),
+  medicamento_id int NOT NULL,
+  FOREIGN KEY (medicamento_id) REFERENCES medicamentos (id)
+);
 
---/*********** ADD FK FROM mascotas TO medicamentos ***************/
-ALTER TABLE medicamentos ADD servicio_id int NOT NULL;
-ALTER TABLE medicamentos ADD FOREIGN KEY (servicio_id) REFERENCES servicios (id);
+/*********** ADD FK FROM mascotas TO servicios ***************/
+ALTER TABLE servicios ADD mascota_id int NOT NULL;
+ALTER TABLE servicios ADD FOREIGN KEY (mascota_id) REFERENCES mascotas (id);

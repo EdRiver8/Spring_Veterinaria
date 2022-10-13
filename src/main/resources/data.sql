@@ -1,10 +1,10 @@
---/*********** INSERT DATA ****************/
-INSERT INTO clientes (cedula, nombres, apellidos, direccion, telefono)
-	VALUES (123, 'Ed', 'Riv', 'Calle 10', '555');
-INSERT INTO clientes (cedula, nombres, apellidos, direccion, telefono)
-	VALUES (777, 'Lili', 'Bol', 'Av 48', '444');
-INSERT INTO clientes (cedula, nombres, apellidos, direccion, telefono)
-	VALUES (7020, 'Alex', 'Riv', 'Diag 27', '222');
+/*********** INSERT DATA ****************/
+INSERT INTO clientes (cedula, nombres, apellidos, direccion, telefono) 
+	VALUES (123, 'Juan Esteban', 'Giraldo', 'Calle 10', '555');
+INSERT INTO clientes (cedula, nombres, apellidos, direccion, telefono) 
+	VALUES (777, 'Juan Pablo', 'Rivera', 'Av 48', '444');
+INSERT INTO clientes (cedula, nombres, apellidos, direccion, telefono) 
+	VALUES (7020, 'Nicolas', 'Hidalgo', 'Diag 27', '222');
 
 
 INSERT INTO mascotas (nombre, raza, edad, peso, cliente_id)
@@ -41,3 +41,20 @@ INSERT INTO medicamentos (nombre, descripcion, dosis, servicio_id)
 	VALUES ('Rondel', 'Antiparasitario', '5 ml', 4);
 INSERT INTO medicamentos (nombre, descripcion, dosis, servicio_id)
 	VALUES ('Adaptil', 'Ayuda a la ansiedad', '60 ml', 3);
+
+
+
+-- REPORTE INFORME DE SERVICIOS
+-- SELECT medicamentos.nombre FROM medicamentos;
+
+-- SELECT med.nombre as nombre_med, ser.descripcion as descripcion_servicio 
+-- 	FROM medicamentos as med INNER JOIN servicios as ser ON med.id = ser.medicamento_id;
+	
+-- SELECT mas.nombre as mascota, med.nombre as nombre_med, ser.descripcion as descripcion_servicio 
+-- 	FROM medicamentos as med INNER JOIN servicios as ser ON med.id = ser.medicamento_id
+-- 	INNER JOIN mascotas as mas ON ser.mascota_id = mas.id;
+	
+-- SELECT cli.nombres as nombre_cliente, mas.nombre as mascota, med.nombre as nombre_med, ser.descripcion as descripcion_servicio 
+-- 	FROM medicamentos as med INNER JOIN servicios as ser ON med.id = ser.medicamento_id
+-- 	INNER JOIN mascotas as mas ON ser.mascota_id = mas.id
+-- 	INNER JOIN clientes as cli ON cli.id = mas.cliente_id;
