@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.com">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios</title>
+</head>
+
+<body>
+  <div>
+    <!-- cuando se le de enviar, ejecuta la url '/servicios' por el methodo post -->
+    <form th:action="@{/servicios/{id}(id=*{id})}" method="post">
+      <div>
+        <label for="descripcion">Descripcion</label>
+        <textarea cols="30" rows="2" id="descripcion" th:field="${servicio.descripcion}">Hola</textarea>
+      </div>
+      <button type="submit">Guardar</button>
+  </div>
+  </form>
+  </div>
+  <div>
+    <h1>Lista de Servicios</h1>
+    <table>
+      <thead>
+        <th>DESCRIPCION</th>
+        <th>CREADO</th>
+        <th>MODIFICADO</th>
+      </thead>
+      <tbody>
+        <tr th:each="servicio : ${servicios}" th:object="${servicio}">
+          <td th:text="*{descripcion}"></td>
+          <td th:text="*{fechaServicio}"></td>
+          <td th:text="*{fechaServicioActualizacion}"></td>
+          <td>
+            <a th:href="@{/servicios/{id} (id=*{id})}">EDITAR</a>
+          </td>
+          <td>
+            <a th:href="@{/servicios/eliminar/{id} (id=*{id})}">BORRAR</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

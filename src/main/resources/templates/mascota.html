@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.com">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../static/style.css">
+  <title>Mascotas</title>
+</head>
+
+<body>
+  <div>
+    <!-- cuando se le de enviar, ejecuta '/mascota' por el methodo post -->
+    <form th:action="@{/mascotas/{id}(id=*{id})}" method="post">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" th:field="${mascota.nombre}" required>
+      </div>
+      <div>
+        <label for="raza">Raza</label>
+        <input type="text" id="raza" th:field="${mascota.raza}" required>
+      </div>
+      <div>
+        <label for="edad">Edad</label>
+        <input type="text" id="edad" th:field="${mascota.edad}">
+      </div>
+      <div>
+        <label for="peso">Peso</label>
+        <input type="text" id="peso" th:field="${mascota.peso}" required>
+      </div>
+      <div>
+        <label for="cliente">cliente</label>
+        <input type="text" id="cliente" th:field="${mascota.cliente}">
+      </div>
+      <div>
+        <button type="submit">Guardar</button>
+      </div>
+    </form>
+  </div>
+  <div>
+    <h1>Lista de Mascotas</h1>
+    <table>
+      <thead>
+        <th>NOMBRE</th>
+        <th>RAZA</th>
+        <th>EDAD</th>
+        <th>PESO</th>
+        <th>EDITAR</th>
+        <th>BORRAR</th>
+      </thead>
+      <tbody>
+        <tr th:each="mascota : ${mascotas}" th:object="${mascota}">
+          <td th:text="*{nombre}"></td>
+          <td th:text="*{raza}"></td>
+          <td th:text="*{edad}"></td>
+          <td th:text="*{peso}"></td>
+          <td>
+            <a th:href="@{/mascotas/{id} (id=*{id})}">EDITAR</a>
+          </td>
+          <td>
+            <a th:href="@{/mascotas/eliminar/{id} (id=*{id})}">BORRAR</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

@@ -30,7 +30,7 @@ public class Cliente {
 
     private String direccion;
 
-    @Size(max = 15)
+    @Size(min = 7, max = 13, message = "Ingrese un numero valido de 7-15 digitos")
     private String telefono;
 
 //    mapeado por el nombre del atributo con el que se relaciona

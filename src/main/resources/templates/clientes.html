@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.com">
+
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <title>Title</title>
+</head>
+
+<body class="container py-5">
+  <div class="p-5 bg-light rounded shadow text-center mb--5">
+    <h1 class="text-primary display-1">Informe de CLientes</h1>
+    <p class="fw-bold mt-3">En este parte puedes realizar gestion de los clientes</p>
+    <hr>
+    <p>Consulta, edita o elimina los clientes de la veterinaria</p>
+  </div>
+  <h1>Lista de Clientes</h1>
+  <div class="text-end">
+    <a href="/veterinary/v1/clientes/nuevo" class="btn btn-primary">Nuevo cliente</a>
+  </div>
+  <div th:if="${msgExito ne null}" class="alert alert-success alert-dismissible mt-3">[[${msgExito}]]
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <th>ID</th>
+      <th>CEDULA</th>
+      <th>NOMBRES</th>
+      <th>APELLIDOS</th>
+      <th>DIRECCION</th>
+      <th>TELEFONO</th>
+      <th>OPCIONES</th>
+    </thead>
+    <tbody>
+      <tr th:each="cliente : ${clientes}" th:object="${cliente}">
+        <td th:text="*{id}"></td>
+        <td th:text="*{cedula}"></td>
+        <td th:text="*{nombres}"></td>
+        <td th:text="*{apellidos}"></td>
+        <td th:text="*{direccion}"></td>
+        <td th:text="*{telefono}"></td>
+        <td>
+          <a th:href="@{/clientes/{id}/editar(id=*{id})}">Editar</a>
+        </td>
+      </tr>
+      <!-- <caption>Mascotas</caption>
+      <tr th:each="mascota : ${clientes.getMascota()}">
+        <td th:text="${mascota.nombre}"></td>
+      </tr> -->
+    </tbody>
+  </table>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+  </script>
+</body>
+
+</html>

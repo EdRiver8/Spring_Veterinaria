@@ -28,13 +28,13 @@ public class Mascota {
     @Min(value = 1, message = "Ingrese el peso de la mascota")
     private Float peso;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", updatable = true, nullable = false) //  nombre de la columna en la db
-//    @NotNull(message = "Debe ingresar la moscata que trajo el cliente")
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "cliente_id", updatable = true, nullable = true) //  nombre de la columna en la db
+    //    @NotNull(message = "Debe ingresar la moscata que trajo el cliente")
     @JsonBackReference // solo carga la mascota desde el cliente, mas no se carga el cliente cuando se busque la mascota
     private Cliente cliente;
-
-    @OneToMany(mappedBy = "mascota", fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private List<Servicio> servicio;
+//
+//    @OneToMany(mappedBy = "mascota", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<Servicio> servicio;
 }

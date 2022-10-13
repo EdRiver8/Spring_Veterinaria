@@ -33,8 +33,8 @@ public class Medicamento {
 //    @JsonManagedReference
 //    private List<Servicio> servicio;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "servicio_id")
-    private Servicio servicio;
+//    @ManyToOne
+//    @JsonBackReference
+//    @JoinColumn(name = "servicio_id", nullable = true)
+//    private Servicio servicio;
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.com">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicamentos</title>
+</head>
+
+<body>
+  <div>
+    <!-- cuando se le de enviar, ejecuta la url '/medicamento' por el methodo post -->
+    <form th:action="@{/medicamentos/{id}(id=*{id})}" method="post">
+      <div>
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" th:field="${medicamento.nombre}" required>
+      </div>
+      <div>
+        <label for="dosis">Dosis</label>
+        <input type="text" id="dosis" th:field="${medicamento.dosis}" required>
+      </div>
+      <div>
+        <label for="descripcion">Descripcion</label>
+        <input type="text" id="descripcion" th:field="${medicamento.descripcion}">
+      </div>
+      <button type="submit">Guardar</button>
+  </div>
+  </form>
+  </div>
+  <div>
+    <h1>Lista de Medicamentos</h1>
+    <table>
+      <thead>
+        <th>NOMBRE</th>
+        <th>DOSIS</th>
+        <th>DESCRIPCION</th>
+        <th>EDITAR</th>
+        <th>BORRAR</th>
+      </thead>
+      <tbody>
+        <tr th:each="medicamento : ${medicamentos}" th:object="${medicamento}">
+          <td th:text="*{nombre}"></td>
+          <td th:text="*{dosis}"></td>
+          <td th:text="*{descripcion}"></td>
+          <td>
+            <a th:href="@{/medicamentos/{id} (id=*{id})}">EDITAR</a>
+          </td>
+          <td>
+            <a th:href="@{/medicamentos/eliminar/{id} (id=*{id})}">BORRAR</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

@@ -1,6 +1,5 @@
 package veterinaria.service;
 
-import veterinaria.entity.Cliente;
 import veterinaria.entity.Medicamento;
 
 import java.util.List;

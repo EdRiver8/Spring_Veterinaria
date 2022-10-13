@@ -37,6 +37,7 @@ public class ServicioServiceImp implements ServicioService{
     public Servicio updateServicio(Servicio servicio, Long id) {
         if(findService(id) != null){
             servicio.setId(findService(id).getId());
+            servicio.setFechaServicio(findService(id).getFechaServicio());
             return createServicio(servicio);
         }
         return null;
