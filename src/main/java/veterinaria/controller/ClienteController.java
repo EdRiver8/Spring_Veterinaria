@@ -1,5 +1,9 @@
 package veterinaria.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/clientes")
 public class ClienteController {
+
+    private final Logger logger = LoggerFactory.getLogger(ClienteController.class);
 
     @Autowired
     private ClienteService clienteService;
@@ -48,6 +54,10 @@ public class ClienteController {
         if(result.hasErrors()){
             model.addAttribute("cliente", cliente);
             return "cliente_form";
+        }
+        if (cliente.getId() != null){
+            logger.warn("Trying to create a Cliente with id");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         model.addAttribute("cliente", clienteService.createCliente(cliente));
         ra.addFlashAttribute("msgExito", "Cliente Guardado!");
@@ -97,11 +107,16 @@ public class ClienteController {
         if(result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
+        if (cliente.getId() != null){
+            logger.warn("Trying to create a Cliente with id");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.createCliente(cliente));
     }
 
     @GetMapping("/find/{id}")
-    public ResponseEntity<Cliente> findCliente(@PathVariable("id") Long id){
+    @ApiOperation("Buscar un cliente por id")
+    public ResponseEntity<Cliente> findCliente(@ApiParam("Clave primaria de tipo Long") @PathVariable("id") Long id){
         if(clienteService.findClienteById(id) != null){
 //            List<Mascota> mascotas = (clienteService.findClienteById(1L).getMascota());
             return ResponseEntity.ok(clienteService.findClienteById(id));
@@ -122,6 +137,7 @@ public class ClienteController {
         if(clienteService.deleteCliente(id) != null){
             return ResponseEntity.ok(clienteService.deleteCliente(id));
         }
+        logger.warn("Trying to delete a non existent cliente");
         return ResponseEntity.notFound().build();
     }
 
